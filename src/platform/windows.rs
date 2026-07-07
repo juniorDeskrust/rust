@@ -3746,8 +3746,9 @@ pub fn try_remove_temp_update_files() {
         if let Ok(entry) = entry {
             let path = entry.path();
             if let Some(file_name) = path.file_name().and_then(|n| n.to_str()) {
-                // Match files like rustdesk-*.msi or rustdesk-*.exe
-                if file_name.starts_with("rustdesk-")
+                // Match files like <app_name>-*.msi or <app_name>-*.exe
+                let prefix = format!("{}-", crate::get_app_name().to_lowercase());
+                if file_name.to_lowercase().starts_with(&prefix)
                     && (file_name.ends_with(".msi") || file_name.ends_with(".exe"))
                 {
                     // Skip files modified within the last hour to avoid deleting files being downloaded

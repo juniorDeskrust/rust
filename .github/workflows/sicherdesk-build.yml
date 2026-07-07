@@ -186,17 +186,13 @@ jobs:
           sed -i '/dpiAware/d' res/manifest.xml
           pushd ./libs/portable
           pip3 install -r requirements.txt
-          python3 ./generate.py -f ../../rustdesk/ -o . -e ../../rustdesk/rustdesk.exe
+          python3 ./generate.py -f ../../rustdesk/ -o . -e ../../rustdesk/SicherDesk.exe
           popd
           mkdir -p ./SignOutput
           mv ./target/release/rustdesk-portable-packer.exe ./SignOutput/SicherDesk-${{ env.VERSION }}-x64.exe
 
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
-
-      - name: Rename dist exe for MSI app-name matching
-        shell: bash
-        run: mv ./rustdesk/rustdesk.exe ./rustdesk/SicherDesk.exe
 
       - name: Build msi
         run: |
