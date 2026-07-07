@@ -92,9 +92,9 @@ BEGIN
             VALUE "CompanyName", "SicherDesk GmbH" "\0"
             VALUE "FileDescription", "SicherDesk Remote Desktop" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "smidthdesk" "\0"
+            VALUE "InternalName", "sicherdesk" "\0"
             VALUE "LegalCopyright", "Copyright © 2026 SicherDesk GmbH. All rights reserved." "\0"
-            VALUE "OriginalFilename", "smidthdesk.exe" "\0"
+            VALUE "OriginalFilename", "SicherDesk.exe" "\0"
             VALUE "ProductName", "SicherDesk" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
