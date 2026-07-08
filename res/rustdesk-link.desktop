@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=RustDesk
+Name=SicherDesk
 NoDisplay=true
 MimeType=x-scheme-handler/rustdesk;
 TryExec=rustdesk
