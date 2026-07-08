@@ -316,8 +316,7 @@ jobs:
             libxcb-randr0-dev libxcb-shape0-dev libxcb-xfixes0-dev \
             libxdo-dev libxfixes-dev nasm ninja-build pkg-config \
             python3 python3-pip libssl-dev libvpx-dev libopus-dev \
-            libyuv-dev libaom-dev \
-            libclang-10-dev llvm-10-dev tree
+            libyuv-dev libaom-dev tree
 
       - name: Install flutter
         uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
