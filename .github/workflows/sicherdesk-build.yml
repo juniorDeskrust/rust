@@ -315,8 +315,7 @@ jobs:
             libgtk-3-dev libpam0g-dev libpulse-dev \
             libxcb-randr0-dev libxcb-shape0-dev libxcb-xfixes0-dev \
             libxdo-dev libxfixes-dev nasm ninja-build pkg-config \
-            python3 python3-pip libssl-dev libvpx-dev libopus-dev \
-            libyuv-dev libaom-dev tree
+            python3 python3-pip libssl-dev libva-dev tree
 
       - name: Install flutter
         uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
@@ -346,10 +345,21 @@ jobs:
           name: sicherdesk-bridge-artifact
           path: ./
 
+      - name: Setup vcpkg with Github Actions binary cache
+        uses: lukka/run-vcpkg@b1a0dd252f06b9e25b3c022a9a03bd7a427fb6a2 # v11
+        with:
+          vcpkgDirectory: /opt/artifacts/vcpkg
+          vcpkgGitCommitId: ${{ env.VCPKG_COMMIT_ID }}
+          doNotCache: false
+
+      - name: Install vcpkg dependencies
+        run: |
+          $VCPKG_ROOT/vcpkg install --triplet x64-linux --x-install-root="$VCPKG_ROOT/installed"
+
       - name: Build SicherDesk deb
         run: |
-          # Use system apt libs via pkg-config instead of vcpkg (faster, simpler, no hwcodec).
-          cargo build --locked --features flutter,unix-file-copy-paste,linux-pkg-config --lib --release
+          export VCPKG_ROOT=/opt/artifacts/vcpkg
+          cargo build --locked --features flutter,unix-file-copy-paste --lib --release
           python3 ./build.py --flutter --unix-file-copy-paste --skip-cargo
           ls -la *.deb
           for f in rustdesk-*.deb; do mv "$f" "SicherDesk-${{ env.VERSION }}-x64.deb"; done
